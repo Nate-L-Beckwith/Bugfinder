@@ -1,7 +1,0 @@
-# requirements.txt
-nginx
-nginx-rtmp-module
-ffmpeg
-python3
-pip3
-Flask
