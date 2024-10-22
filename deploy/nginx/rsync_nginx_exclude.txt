@@ -1,0 +1,4 @@
+*.default
+win-utf
+koi-win
+koi-utf
