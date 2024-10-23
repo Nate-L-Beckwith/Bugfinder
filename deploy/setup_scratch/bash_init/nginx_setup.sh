@@ -3,8 +3,7 @@ export bash_DEPLOY_DIR="$HOME/Bugfinder/deploy/setup_scratch/bash_init"
 echo $bash_DEPLOY_DIR
 cd $bash_DEPLOY_DIR
 
-source preres.sh
-source vars.sh
+source $bash_DEPLOY_DIR/*.sh
 
 cd $NGINX_SRC_DIR
 
