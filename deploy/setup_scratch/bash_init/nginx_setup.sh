@@ -1,7 +1,7 @@
 #!/bin/bash
-export NGINX_DEPLOY_DIR="$HOME/Bugfinder/deploy/nginx" 
-echo $NGINX_DEPLOY_DIR
-cd $NGINX_DEPLOY_DIR
+export bash_DEPLOY_DIR="$HOME/Bugfinder/deploy/setup_scratch/bash_init"
+echo $bash_DEPLOY_DIR
+cd $bash_DEPLOY_DIR
 
 source preres.sh
 source vars.sh
