@@ -40,6 +40,6 @@ sudo -E ./configure \
 sudo -E make
 sudo -E make install
 
-sudo -E nginx -v
+sudo -E nginx -vV
 
 echo "Done"
