@@ -1,4 +1,5 @@
 #!/bin/bash
+
 sudo mkdir -p /src/nginx/modules
 
 export NGINX_VERSION="1.27.2"
