@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo mkdir -p /src/nginx/modules
+
 export NGINX_VERSION="1.27.2"
 export NGINX_SRC_DIR="/src/nginx"
 export NGINX_MODULE_DIR="/src/nginx/modules"
