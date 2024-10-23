@@ -5,7 +5,7 @@ cd ~/Bugfinder
 git switch rtmp-breakout
 
 git restore * && git pull
-git switch rtmp-breakout
+git switch stream_tests
 
 chmod +x $bash_DEPLOY_DIR/*.sh
 cp -rav $bash_DEPLOY_DIR/quick_tests.sh ~/quick_tests.sh
