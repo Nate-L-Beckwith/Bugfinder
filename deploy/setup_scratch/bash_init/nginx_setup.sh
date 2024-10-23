@@ -30,7 +30,7 @@ sudo ./configure \
     --with-threads \
     --with-stream \
     --with-stream_ssl_module \
-    --add-module=../nginx-rtmp-module
+    --add-module=../modules/nginx-rtmp-module
 
 sudo make
 sudo make install
