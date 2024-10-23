@@ -6,4 +6,4 @@ DEST_DIR="/usr/local/nginx/"
 EXCLUDE_FILE="$HOME/Bugfinder/deploy/nginx/rsync_nginx_exclude.txt"
 
 # rsync command
-sudo rsync -avz --delete --exclude-from="$EXCLUDE_FILE" "$SOURCE_DIR" "$DEST_DIR"
+sudo rsync -avzu --delete --exclude-from="$EXCLUDE_FILE" "$SOURCE_DIR" "$DEST_DIR"

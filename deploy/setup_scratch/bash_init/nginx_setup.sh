@@ -13,7 +13,6 @@ sudo git clone https://github.com/arut/nginx-rtmp-module.git modules/nginx-rtmp-
 
 cd $NGINX_DIR
 
-def
 sudo ./configure \
     --prefix=/usr/local/nginx \
     --sbin-path=/usr/sbin/nginx \
