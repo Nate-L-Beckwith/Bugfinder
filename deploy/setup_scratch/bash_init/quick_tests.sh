@@ -1,7 +1,7 @@
 # quick_tests.sh
 #!/bin/bash
 export bash_DEPLOY_DIR="$HOME/Bugfinder/deploy/setup_scratch/bash_init"
-
+cd ~/Bugfinder
 git switch rtmp-breakout
 
 git restore * && git pull
