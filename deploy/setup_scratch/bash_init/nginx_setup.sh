@@ -1,11 +1,9 @@
 #!/bin/bash
 include ./vars.sh
-include ../preres.sh
+include ./preres.sh
 
-sudo ../preres.sh
+sudo ./preres.sh
 sudo ./vars.sh
-
-sudo mkdir -p /src/nginx/modules
 
 cd $NGINX_SRC_DIR
 

@@ -2,7 +2,7 @@
 
 sudo apt update && sudo apt upgrade -y
 
-sudo apt install -y git curl wget vim \
+sudo apt install -y git curl wget vim rsync \
     build-essential cmake python3 python3-pip \
     libjpeg-dev libtiff-dev libpng-dev libavcodec-dev \
     libavformat-dev libswscale-dev libv4l-dev \
@@ -15,5 +15,6 @@ sudo apt install -y git curl wget vim \
     libswresample-dev
 
 sudo apt autoclean && sudo apt autoremove
+
 
 echo "Done"
