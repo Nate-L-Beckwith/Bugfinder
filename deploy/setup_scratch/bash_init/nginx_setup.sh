@@ -1,6 +1,6 @@
 #!/bin/bash
-./preres.sh
-./vars.sh
+source ./preres.sh
+source ./vars.sh
 
 cd $NGINX_SRC_DIR
 
