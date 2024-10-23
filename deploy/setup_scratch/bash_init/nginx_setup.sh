@@ -10,7 +10,7 @@ cd $NGINX_SRC_DIR
 
 sudo -E wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
 sudo -E tar -zxvf nginx-$NGINX_VERSION.tar.gz
-git clone https://github.com/arut/nginx-rtmp-module.git $NGINX_MODULE_DIR
+git clone https://github.com/arut/nginx-rtmp-module.git $NGINX_MODULE_DIR/nginx-rtmp-module
 
 cd $NGINX_DIR
 
