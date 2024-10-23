@@ -1,8 +1,9 @@
 #!/bin/bash
 export NGINX_DEPLOY_DIR="$HOME/Bugfinder/deploy/nginx" 
 cd $NGINX_DEPLOY_DIR
-source ./preres.sh;
-source ./vars.sh;
+
+source preres.sh
+source vars.sh
 
 cd $NGINX_SRC_DIR
 
