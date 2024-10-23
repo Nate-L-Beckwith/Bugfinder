@@ -10,6 +10,7 @@ git clone https://github.com/arut/nginx-rtmp-module.git $NGINX_MODULE_DIR
 
 cd $NGINX_DIR
 
+
 sudo ./configure \
     --prefix=/usr/local/nginx \
     --sbin-path=/usr/sbin/nginx \
