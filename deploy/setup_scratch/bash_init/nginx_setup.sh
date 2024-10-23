@@ -1,9 +1,6 @@
 #!/bin/bash
-include ./vars.sh
-include ./preres.sh
-
-sudo ./preres.sh
-sudo ./vars.sh
+exec_static preres.sh
+exec_static vars.sh
 
 cd $NGINX_SRC_DIR
 
