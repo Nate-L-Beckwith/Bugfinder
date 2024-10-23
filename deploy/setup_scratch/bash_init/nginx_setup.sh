@@ -1,17 +1,18 @@
 #!/bin/bash
-source .preres.sh;
-source .vars.sh;
+cd 
+source ./preres.sh;
+source ./vars.sh;
 
 cd $NGINX_SRC_DIR
 
-sudo wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
-sudo tar -zxvf nginx-$NGINX_VERSION.tar.gz
+sudo -E wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
+sudo -E tar -zxvf nginx-$NGINX_VERSION.tar.gz
 git clone https://github.com/arut/nginx-rtmp-module.git $NGINX_MODULE_DIR
 
 cd $NGINX_DIR
 
 
-sudo ./configure \
+sudo -E ./configure \
     --prefix=/usr/local/nginx \
     --sbin-path=/usr/sbin/nginx \
     --conf-path=/etc/nginx/nginx.conf \
@@ -33,9 +34,9 @@ sudo ./configure \
     --with-stream_ssl_module \
     --add-module=$NGINX_MODULE_DIR/nginx-rtmp-module
 
-sudo make
-sudo make install
+sudo -E make
+sudo -E make install
 
-sudo nginx -v
+sudo -E nginx -v
 
 echo "Done"
