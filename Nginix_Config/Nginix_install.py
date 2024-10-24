@@ -1,7 +1,8 @@
 # nginx_setup/nginx_installer.py
 import os
-from utils import {run_command, install_dependencies, download_file, extract_tarball, clone_repository
-}
+from utils import (run_command, install_dependencies, download_file, extract_tarball, clone_repository)
+
+
 def setup_nginx(config):
     """Setup and install Nginx with the specified configuration."""
     nginx_config = config.get("nginx", {})
