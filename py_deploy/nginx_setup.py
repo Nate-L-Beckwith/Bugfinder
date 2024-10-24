@@ -7,9 +7,30 @@ from git import Repo
 
 
 def run_command(command):
-    """Run a shell command and print it."""
+    """Run a shell command and print it, with error handling."""
     print(f"Running command: {command}")
-    subprocess.run(command, shell=True, check=True)
+    try:
+        subprocess.run(command, shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Command '{command}' failed with error: {e}")
+        exit(1)
+
+
+def install_dependencies():
+    """Ensure necessary dependencies for building Nginx are installed."""
+    print("Checking and installing required build dependencies...")
+    dependencies = [
+        "make",
+        "gcc",
+        "g++",
+        "libpcre3-dev",
+        "zlib1g-dev",
+        "libssl-dev",
+        "git",
+    ]
+    run_command(
+        f"sudo apt-get update && sudo apt-get install -y {' '.join(dependencies)}"
+    )
 
 
 def download_file(url, destination):
@@ -34,53 +55,79 @@ def clone_repository(repo_url, destination_dir):
         print(f"Repository already exists at {destination_dir}")
 
 
-def setup_nginx():
-    # Load environment variables from file
+def fetch_nginx_config():
+    """Load Nginx configuration from environment variables and validate them."""
     load_dotenv("nginx_vars.env")
 
-    # Set up environment variables from the var file
-    nginx_version = os.getenv("nginx_version")
-    nginx_src_dir = os.getenv("nginx_src_dir")
-    nginx_module_dir = os.getenv("nginx_module_dir")
-    nginx_install_dir = os.getenv("nginx_install_dir")
-    nginx_sbin_path = os.getenv("nginx_sbin_path")
-    nginx_conf_path = os.getenv("nginx_conf_path")
-    nginx_pid_path = os.getenv("nginx_pid_path")
-    nginx_lock_path = os.getenv("nginx_lock_path")
-    nginx_error_log_path = os.getenv("nginx_error_log_path")
-    nginx_access_log_path = os.getenv("nginx_access_log_path")
+    # Retrieve required environment variables with validation
+    required_vars = [
+        "nginx_version",
+        "nginx_src_dir",
+        "nginx_module_dir",
+        "nginx_install_dir",
+        "nginx_sbin_path",
+        "nginx_conf_path",
+        "nginx_pid_path",
+        "nginx_lock_path",
+        "nginx_error_log_path",
+        "nginx_access_log_path",
+    ]
+
+    config = {}
+    for var in required_vars:
+        value = os.getenv(var)
+        if value is None:
+            raise ValueError(
+                f"Environment variable '{var}' is not set. Please check your nginx_vars.env file."
+            )
+        config[var] = value
+
+    return config
+
+
+def setup_nginx():
+    # Load the Nginx configuration
+    config = fetch_nginx_config()
 
     # Derived paths
-    nginx_dir = os.path.join(nginx_src_dir, f"nginx-{nginx_version}")
-    nginx_tarball = os.path.join(nginx_src_dir, f"nginx-{nginx_version}.tar.gz")
-
-    # Ensure the source directory exists
-    os.makedirs(nginx_src_dir, exist_ok=True)
-
-    download_url = f"http://nginx.org/download/nginx-{nginx_version}.tar.gz"
-    download_file(download_url, nginx_tarball)
-    extract_tarball(nginx_tarball, nginx_src_dir)
-
-    # Clone the nginx-rtmp-module repository using GitPython
-    os.makedirs(nginx_module_dir, exist_ok=True)
-    clone_repository(
-        "https://github.com/arut/nginx-rtmp-module.git",
-        os.path.join(nginx_module_dir, "nginx-rtmp-module"),
+    nginx_dir = os.path.join(
+        config["nginx_src_dir"], f"nginx-{config['nginx_version']}"
+    )
+    nginx_tarball = os.path.join(
+        config["nginx_src_dir"], f"nginx-{config['nginx_version']}.tar.gz"
     )
 
-    # Change to the Nginx directory
+    # Ensure the source directory exists
+    os.makedirs(config["nginx_src_dir"], exist_ok=True)
+
+    # Step 1: Install dependencies (make, gcc, pcre, ssl, etc.)
+    install_dependencies()
+
+    # Step 2: Download and extract Nginx
+    download_url = f"http://nginx.org/download/nginx-{config['nginx_version']}.tar.gz"
+    download_file(download_url, nginx_tarball)
+    extract_tarball(nginx_tarball, config["nginx_src_dir"])
+
+    # Step 3: Clone the nginx-rtmp-module repository using GitPython
+    os.makedirs(config["nginx_module_dir"], exist_ok=True)
+    clone_repository(
+        "https://github.com/arut/nginx-rtmp-module.git",
+        os.path.join(config["nginx_module_dir"], "nginx-rtmp-module"),
+    )
+
+    # Step 4: Change to the Nginx directory
     os.chdir(nginx_dir)
 
-    # Configure Nginx with the necessary modules
+    # Step 5: Configure Nginx with the necessary modules
     configure_command = (
         f"sudo -E ./configure "
-        f"--prefix={nginx_install_dir} "
-        f"--sbin-path={nginx_sbin_path} "
-        f"--conf-path={nginx_conf_path} "
-        f"--pid-path={nginx_pid_path} "
-        f"--lock-path={nginx_lock_path} "
-        f"--error-log-path={nginx_error_log_path} "
-        f"--http-log-path={nginx_access_log_path} "
+        f"--prefix={config['nginx_install_dir']} "
+        f"--sbin-path={config['nginx_sbin_path']} "
+        f"--conf-path={config['nginx_conf_path']} "
+        f"--pid-path={config['nginx_pid_path']} "
+        f"--lock-path={config['nginx_lock_path']} "
+        f"--error-log-path={config['nginx_error_log_path']} "
+        f"--http-log-path={config['nginx_access_log_path']} "
         "--with-http_ssl_module "
         "--with-http_v2_module "
         "--with-http_realip_module "
@@ -93,18 +140,18 @@ def setup_nginx():
         "--with-threads "
         "--with-stream "
         "--with-stream_ssl_module "
-        f"--add-module={os.path.join(nginx_module_dir, 'nginx-rtmp-module')}"
+        f"--add-module={os.path.join(config['nginx_module_dir'], 'nginx-rtmp-module')}"
     )
     run_command(configure_command)
 
-    # Build and install Nginx
+    # Step 6: Build and install Nginx
     run_command("sudo -E make")
     run_command("sudo -E make install")
 
-    # Verify the installation
-    run_command(f"sudo -E {nginx_sbin_path} -vV")
+    # Step 7: Verify the installation
+    run_command(f"sudo -E {config['nginx_sbin_path']} -vV")
 
-    print("Done")
+    print("Nginx setup and installation completed successfully.")
 
 
 if __name__ == "__main__":
