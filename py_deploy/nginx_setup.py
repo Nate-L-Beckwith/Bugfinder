@@ -28,9 +28,7 @@ def install_dependencies():
         "libssl-dev",
         "git",
     ]
-    run_command(
-        f"sudo apt update && sudo apt install -y {' '.join(dependencies)}"
-    )
+    run_command(f"sudo apt update && sudo apt install -y {' '.join(dependencies)}")
 
 
 def download_file(url, destination):
@@ -57,7 +55,7 @@ def clone_repository(repo_url, destination_dir):
 
 def fetch_nginx_config():
     """Load Nginx configuration from environment variables and validate them."""
-    load_dotenv("nginx_vars.env")
+    load_dotenv("~/bug/Bugfinder/py_deploy/nginx_vars.env")
 
     # Retrieve required environment variables with validation
     required_vars = [
