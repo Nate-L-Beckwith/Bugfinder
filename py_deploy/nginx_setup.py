@@ -29,7 +29,7 @@ def install_dependencies():
         "git",
     ]
     run_command(
-        f"sudo apt-get update && sudo apt-get install -y {' '.join(dependencies)}"
+        f"sudo apt update && sudo apt install -y {' '.join(dependencies)}"
     )
 
 
