@@ -6,3 +6,6 @@ __py*
 *.DS_Store
 .DS_Store
 .vscode
+DS_Store
+*.log
+*.log.*
