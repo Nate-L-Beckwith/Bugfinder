@@ -3,9 +3,8 @@ import subprocess
 import sys
 import tarfile
 from urllib.request import urlretrieve
-
 import yaml
-from git import Repo
+from git import Repo, GitCommandError
 
 
 def load_config(config_path):
@@ -24,7 +23,7 @@ def load_config(config_path):
 
 def validate_config(config):
     """Validate the loaded configuration."""
-    required_nginx_vars = [
+    nginx_vars = [
         "version",
         "src_dir",
         "module_dir",
@@ -37,7 +36,7 @@ def validate_config(config):
         "access_log_path",
     ]
 
-    for var in required_nginx_vars:
+    for var in nginx_vars:
         if var not in config.get("nginx", {}):
             print(f"Missing required nginx configuration: {var}")
             sys.exit(1)
@@ -103,7 +102,7 @@ def clone_repository(repo_url, destination_dir):
             print(f"Cloning repository {repo_url} into {destination_dir}...")
             Repo.clone_from(repo_url, destination_dir)
             print("Repository cloned successfully.")
-        except Exception as e:
+        except (GitCommandError, OSError) as e:
             print(f"Failed to clone repository {repo_url}: {e}")
             sys.exit(1)
     else:

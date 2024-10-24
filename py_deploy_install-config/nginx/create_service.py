@@ -5,7 +5,7 @@ from jinja2 import Template
 
 
 # Read the service template from the Jinja2 file
-with open("/home/bug/Bugfinder/py_deploy/conf_command.py.j2", "r") as file:
+with open("{template_dir}/ .j2", "r", encoding="utf-8") as file:
     service_template = file.read()
 
 service_file_path = "/etc/systemd/system/my_service.service"
@@ -19,7 +19,7 @@ def create_service_file():
     print(f"Creating service file at {service_file_path}")
 
     try:
-        with open(service_file_path, "w") as service_file:
+        with open(service_file_path, "w", encoding="utf-8") as service_file:
             service_file.write(service_template)
         print(f"Service file {service_file_path} created successfully.")
     except PermissionError as e:
