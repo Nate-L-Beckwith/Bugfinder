@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# This script installs Anaconda and configures the environment.
-
-# Variables
-ANACONDA_VERSION="2023.07"
+ANACONDA_VERSION="2024.10-1"
 ANACONDA_INSTALL_DIR="$HOME/anaconda3"
 ANACONDA_INSTALLER="Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh"
 ANACONDA_URL="https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}"
