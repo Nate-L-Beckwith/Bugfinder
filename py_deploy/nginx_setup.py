@@ -1,17 +1,33 @@
 import os
 import subprocess
+from dotenv import load_dotenv
+
 
 def run_command(command):
     """Run a shell command and print it."""
     print(f"Running command: {command}")
     subprocess.run(command, shell=True, check=True)
 
+
 def setup_nginx():
-    # Set up environment variables
-    nginx_version = os.environ.get('NGINX_VERSION', '1.21.3')
-    nginx_src_dir = os.environ.get('NGINX_SRC_DIR', '/usr/local/src')
-    nginx_module_dir = os.environ.get('NGINX_MODULE_DIR', '/usr/local/src/nginx-modules')
-    nginx_dir = os.path.join(nginx_src_dir, f'nginx-{nginx_version}')
+    # Load environment variables from file
+    load_dotenv("nginx_vars.env")
+
+    # Set up environment variables from the var file
+    nginx_version = os.getenv("nginx_version")
+    nginx_src_dir = os.getenv("nginx_src_dir")
+    nginx_module_dir = os.getenv("nginx_module_dir")
+    nginx_install_dir = os.getenv("nginx_install_dir")
+    nginx_sbin_path = os.getenv("nginx_sbin_path")
+    nginx_conf_path = os.getenv("nginx_conf_path")
+    nginx_pid_path = os.getenv("nginx_pid_path")
+    nginx_lock_path = os.getenv("nginx_lock_path")
+    nginx_error_log_path = os.getenv("nginx_error_log_path")
+    nginx_access_log_path = os.getenv("nginx_access_log_path")
+
+
+    # Derived paths
+    nginx_dir = os.path.join(nginx_src_dir, f"nginx-{nginx_version}")
 
     # Change to the source directory
     os.makedirs(nginx_src_dir, exist_ok=True)
@@ -23,21 +39,23 @@ def setup_nginx():
 
     # Clone the nginx-rtmp-module repository
     os.makedirs(nginx_module_dir, exist_ok=True)
-    run_command(f"git clone https://github.com/arut/nginx-rtmp-module.git {nginx_module_dir}/nginx-rtmp-module")
+    run_command(
+        f"git clone https://github.com/arut/nginx-rtmp-module.git {nginx_module_dir}/nginx-rtmp-module"
+    )
 
     # Change to the Nginx directory
     os.chdir(nginx_dir)
 
     # Configure Nginx with the necessary modules
     configure_command = (
-        "sudo -E ./configure "
-        "--prefix=/usr/local/nginx "
-        "--sbin-path=/usr/sbin/nginx "
-        "--conf-path=/etc/nginx/nginx.conf "
-        "--pid-path=/var/run/nginx.pid "
-        "--lock-path=/var/lock/nginx.lock "
-        "--error-log-path=/var/log/nginx/error.log "
-        "--http-log-path=/var/log/nginx/access.log "
+        f"sudo -E ./configure "
+        f"--prefix={nginx_install_dir} "
+        f"--sbin-path={nginx_sbin_path} "
+        f"--conf-path={nginx_conf_path} "
+        f"--pid-path={nginx_pid_path} "
+        f"--lock-path={nginx_lock_path} "
+        f"--error-log-path={nginx_error_log_path} "
+        f"--http-log-path={nginx_access_log_path} "
         "--with-http_ssl_module "
         "--with-http_v2_module "
         "--with-http_realip_module "
@@ -59,9 +77,10 @@ def setup_nginx():
     run_command("sudo -E make install")
 
     # Verify the installation
-    run_command("sudo -E nginx -vV")
+    run_command(f"sudo -E {nginx_sbin_path} -vV")
 
     print("Done")
+
 
 if __name__ == "__main__":
     setup_nginx()
