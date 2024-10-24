@@ -1,43 +1,44 @@
-*.default
-win-utf
-koi-win
-koi-utf
-*.log
-*.tmp
-*.bak
-*.swp
-*.old
-*.orig
-*.rej
-*.swo
-*.DS_Store
-node_modules/
-vendor/
-tmp/
-cache/
-logs/
-uploads/
-.env
-*.pid
-*.sock
-*.lock
-*.gz
-*.zip
-*.tar
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.7z
-*.rar
-*.iso
-*.img
-*.vmdk
-*.vdi
-*.qcow2
-*.qcow
-*.ova
-*.ovf
-*.box
+# System-related files
+*.DS_Store        # macOS system file
+*.pid             # Process ID files
+*.sock            # Unix domain socket files
+*.lock            # Lock files
+
+# Backup and temporary files
+*.tmp             # Temporary files
+*.bak             # Backup files
+*.old             # Old files
+*.orig            # Original files (from patches or merges)
+*.rej             # Rejected patches
+*.swp             # Vim swap files
+*.swo             # Vim swap files
+*.swn             # Vim swap files
+
+# Log files
+*.log             # Log files
+
+# Compression and archive files
+*.gz              # Gzip compressed files
+*.zip             # ZIP compressed files
+*.tar             # Tar archive files
+*.tar.gz          # Tar.gz compressed files
+*.tar.bz2         # Tar.bz2 compressed files
+*.tar.xz          # Tar.xz compressed files
+*.7z              # 7-Zip compressed files
+*.rar             # RAR archive files
+
+# Disk image and virtualization files
+*.iso             # ISO disk image files
+*.img             # Disk image files
+*.vmdk            # VMware disk files
+*.vdi             # VirtualBox disk files
+*.qcow2           # QEMU Copy-On-Write 2 disk images
+*.qcow            # QEMU Copy-On-Write disk images
+*.ova             # Open Virtual Appliance package
+*.ovf             # Open Virtualization Format descriptor
+*.box             # Vagrant box files
+
+# Vagrant-related files
 *.vagrant
 *.vagrant.d
 *.vagrantfile
@@ -46,3 +47,25 @@ uploads/
 *.vagrantfile.local.template
 *.vagrantfile.template
 *.vagrantfile.example
+
+# Environment files
+.env              # Environment configuration files
+
+# Node.js and vendor directories
+node_modules/     # Node.js dependency directory
+vendor/           # Vendor dependency directory
+
+# Application-specific temporary directories
+tmp/              # Temporary files
+cache/            # Cache files
+logs/             # Log files
+uploads/          # Uploaded files
+
+# Character encoding-related files
+*.default         # Character encoding-related files
+win-utf           # Windows UTF encoding
+koi-win           # KOI-8 encoding for Windows
+koi-utf           # KOI-8 encoding in UTF
+
+# Exclude additional untracked files
+*.swo             # More vim swap files
