@@ -45,7 +45,7 @@ echo_message "Cleaning up the Anaconda installer..."
 rm -f "$ANACONDA_INSTALLER"
 
 echo_message "Creating a default Conda environment"
-conda create -n default_env python3 -y
+conda create -n default_env python -y
 
 echo_message "Anaconda installation and configuration is complete."
 
