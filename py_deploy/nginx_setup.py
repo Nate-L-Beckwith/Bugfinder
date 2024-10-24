@@ -55,7 +55,7 @@ def clone_repository(repo_url, destination_dir):
 
 def fetch_nginx_config():
     """Load Nginx configuration from environment variables and validate them."""
-    load_dotenv("~/bug/Bugfinder/py_deploy/nginx_vars.env")
+    load_dotenv("/home//bug/Bugfinder/py_deploy/nginx_vars.env")
 
     # Retrieve required environment variables with validation
     required_vars = [
