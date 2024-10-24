@@ -1,9 +1,10 @@
-import sys
 import os
 import subprocess
+import sys
 import tarfile
-import yaml
 from urllib.request import urlretrieve
+
+import yaml
 from git import Repo
 
 
