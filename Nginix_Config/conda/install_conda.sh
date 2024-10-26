@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ANACONDA_VERSION="2024.10-1"
-ANACONDA_INSTALL_DIR="/opt/apps/anaconda3"
+ANACONDA_INSTALL_DIR="$HOME/anaconda3"
 ANACONDA_INSTALLER="Anaconda3-${ANACONDA_VERSION}-Linux-x86_64.sh"
 ANACONDA_URL="https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}"
 
