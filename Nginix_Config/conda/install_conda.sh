@@ -35,7 +35,7 @@ else
 
     # Initialize Conda
     echo_message "Initializing Conda..."
-    conda init bash
+    conda init
 
     # Clean up the installer
     echo_message "Cleaning up the Anaconda installer..."
