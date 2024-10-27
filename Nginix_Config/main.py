@@ -1,7 +1,7 @@
 # main.py
 import os
-from Nginix_Config.conf_loader import load_config, validate_config
-from Nginix_Config.Nginix_install import setup_nginx
+from conf_loader import load_config, validate_config
+from Nginix_install import setup_nginx
 
 if __name__ == "__main__":
     # Define paths
