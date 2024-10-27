@@ -24,18 +24,21 @@ else
         exit 1
     fi
 
-    # Run the Anaconda installer
+    # Run the Anaconda installer without sudo
     echo_message "Running the Anaconda installer..."
     bash "$ANACONDA_INSTALLER" -b -p "$ANACONDA_INSTALL_DIR"
 
-    # Add Anaconda to PATH
+    # Add Anaconda to PATH in ~/.bashrc
     echo_message "Adding Anaconda to PATH..."
     echo "export PATH=\"$ANACONDA_INSTALL_DIR/bin:\$PATH\"" >> ~/.bashrc
-    source ~/.bashrc
 
-    # Initialize Conda
+    # Update PATH for the current script
+    export PATH="$ANACONDA_INSTALL_DIR/bin:$PATH"
+
+    # Initialize Conda for the current script
     echo_message "Initializing Conda..."
-    conda init
+    source "$ANACONDA_INSTALL_DIR/etc/profile.d/conda.sh"
+    conda init bash
 
     # Clean up the installer
     echo_message "Cleaning up the Anaconda installer..."
@@ -50,9 +53,17 @@ else
     fi
 fi
 
+# Initialize Conda for the current script (if not already done)
+if ! command -v conda &> /dev/null; then
+    source "$ANACONDA_INSTALL_DIR/etc/profile.d/conda.sh"
+fi
+
 # Create a Conda environment with required packages
 echo_message "Creating the 'bugfinder' Conda environment with required packages..."
 conda create -n bugfinder python=3.13 -y
+
+# Activate the Conda environment
+echo_message "Activating the 'bugfinder' environment..."
 conda activate bugfinder
 
 # Install packages in the environment
