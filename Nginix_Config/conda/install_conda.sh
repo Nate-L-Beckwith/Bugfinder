@@ -26,7 +26,7 @@ else
 
     # Run the Anaconda installer
     echo_message "Running the Anaconda installer..."
-    sudo bash "$ANACONDA_INSTALLER" -b -p "$ANACONDA_INSTALL_DIR"
+    bash "$ANACONDA_INSTALLER" -b -p "$ANACONDA_INSTALL_DIR"
 
     # Add Anaconda to PATH
     echo_message "Adding Anaconda to PATH..."
