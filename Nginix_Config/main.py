@@ -6,7 +6,7 @@ from Nginix_Config.Nginix_install import setup_nginx
 if __name__ == "__main__":
     # Define paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(script_dir, "config", "nginx_vars.yaml")
+    config_path = os.path.join(script_dir, "config", "nginx_vars.yml")
 
     # Load configuration
     config = load_config(config_path)
