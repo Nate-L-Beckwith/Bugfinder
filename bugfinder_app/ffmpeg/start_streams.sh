@@ -1,20 +1,10 @@
 #!/bin/bash
 
-# Directory containing the scripts
-SCRIPT_DIR="/home/bug/Bugfinder/common/ffmpeg-scripts"
+# Start streaming Camera 1
+ffmpeg -f v4l2 -i /dev/video0 -vcodec libx264 -preset ultrafast -tune zerolatency -b:v 1500k -maxrate 1500k -bufsize 1000k -pix_fmt yuv420p -g 50 -f flv rtmp://127.0.0.1/live/camera1 &
 
-# Log file to store output and errors
-LOG_FILE="/home/bug/Bugfinder/common/start_streams.log"
+# Start streaming Camera 2
+ffmpeg -f v4l2 -i /dev/video2 -vcodec libx264 -preset ultrafast -tune zerolatency -b:v 1500k -maxrate 1500k -bufsize 1000k -pix_fmt yuv420p -g 50 -f flv rtmp://127.0.0.1/live/camera2 &
 
-# Run each .sh file in the directory sequentially
-for script in "$SCRIPT_DIR"/*.sh; 
-do
-    echo "Running $script..." | tee -a "$LOG_FILE"
-    bash "$script" >> "$LOG_FILE" 2>&1
-    if [ $? -ne 0 ]; then
-        echo "Error running $script. Check the log file for details." | tee -a "$LOG_FILE"
-    else
-        echo "$script completed successfully." | tee -a "$LOG_FILE"
-    fi
-done
-
+# Start streaming Camera 3
+ffmpeg -f v4l2 -i /dev/video6 -vcodec libx264 -preset ultrafast -tune zerolatency -b:v 1500k -maxrate 1500k -bufsize 1000k -pix_fmt yuv420p -g 50 -f flv rtmp://127.0.0.1/live/camera3 &
