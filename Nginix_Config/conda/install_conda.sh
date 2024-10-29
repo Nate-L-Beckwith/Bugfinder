@@ -60,14 +60,13 @@ fi
 
 # Create a Conda environment with required packages
 echo_message "Creating the 'bugfinder' Conda environment with required packages..."
-conda create -n bugfinder python=3.12 gitpython pyyaml flask nginx opencv ffmpeg requests  -y
+conda create -n bugfinder python=3.11 gitpython pyyaml flask opencv ffmpeg requests  conda-forge -y
 
 # Activate the Conda environment
 echo_message "Activating the 'bugfinder' environment..."
 conda activate bugfinder
 
-# Install packages in the environment
-echo_message "Installing packages in 'bugfinder'..."
-conda install -c conda-forge nginx flask opencv -y
-
 echo_message "All installations are complete."
+
+exit 0
+
