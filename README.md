@@ -1,6 +1,3 @@
-Here’s an updated README with details for the additional files:
-
----
 
 # bugfinder
 
