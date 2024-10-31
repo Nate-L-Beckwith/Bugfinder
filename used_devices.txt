@@ -1,14 +1,268 @@
-Logitech Webcam C930e (usb-0000:02:1b.0-1):
-	/dev/video4
-	/dev/video5
-	/dev/media1
 
-Logitech BRIO (usb-0000:02:1b.0-2):
-	/dev/video0
-	/dev/video1
-	/dev/video2
-	/dev/video3
-	/dev/media0
+Driver Info:
+	Driver name      : uvcvideo
+	Card type        : Logitech BRIO
+	Bus info         : usb-0000:02:1b.0-2
+	Driver version   : 6.1.112
+	Capabilities     : 0x84a00001
+		Video Capture
+		Metadata Capture
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+Media Driver Info:
+	Driver name      : uvcvideo
+	Model            : Logitech BRIO
+	Serial           : 1D89625C
+	Bus info         : usb-0000:02:1b.0-2
+	Media version    : 6.1.112
+	Hardware revision: 0x00000317 (791)
+	Driver version   : 6.1.112
+Interface Info:
+	ID               : 0x03000002
+	Type             : V4L Video
+Entity Info:
+	ID               : 0x00000001 (1)
+	Name             : Logitech BRIO
+	Function         : V4L2 I/O
+	Flags            : default
+	Pad 0x0100000d   : 0: Sink
+	  Link 0x02000029: from remote pad 0x1000010 of entity 'Processing 3' (Video Pixel Formatter): Data, Enabled, Immutable
+v4l2-compliance 1.22.1, 64 bits, 64-bit time_t
+
+Compliance test for uvcvideo device /dev/video2:
+
+Driver Info:
+	Driver name      : uvcvideo
+	Card type        : Logitech BRIO
+	Bus info         : usb-0000:02:1b.0-2
+	Driver version   : 6.1.112
+	Capabilities     : 0x84a00001
+		Video Capture
+		Metadata Capture
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+Media Driver Info:
+	Driver name      : uvcvideo
+	Model            : Logitech BRIO
+	Serial           : 1D89625C
+	Bus info         : usb-0000:02:1b.0-2
+	Media version    : 6.1.112
+	Hardware revision: 0x00000317 (791)
+	Driver version   : 6.1.112
+Interface Info:
+	ID               : 0x03000008
+	Type             : V4L Video
+Entity Info:
+	ID               : 0x00000007 (7)
+	Name             : Logitech BRIO
+	Function         : V4L2 I/O
+	Pad 0x01000026   : 0: Sink
+	  Link 0x0200003b: from remote pad 0x1000010 of entity 'Processing 3' (Video Pixel Formatter): Data, Enabled, Immutable
+
+Required ioctls:
+	test MC information (see 'Media Driver Info' above): OK
+	test VIDIOC_QUERYCAP: OK
+	test invalid ioctls: OK
+
+Allow for multiple opens:
+	test second /dev/video2 open: OK
+	test VIDIOC_QUERYCAP: OK
+	test VIDIOC_G/S_PRIORITY: OK
+	test for unlimited opens: OK
+
+Debug ioctls:
+	test VIDIOC_DBG_G/S_REGISTER: OK (Not Supported)
+	test VIDIOC_LOG_STATUS: OK (Not Supported)
+
+Input ioctls:
+	test VIDIOC_G/S_TUNER/ENUM_FREQ_BANDS: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_S_HW_FREQ_SEEK: OK (Not Supported)
+	test VIDIOC_ENUMAUDIO: OK (Not Supported)
+		fail: v4l2-test-input-output.cpp(492): could not set input to 0
+	test VIDIOC_G/S/ENUMINPUT: FAIL
+	test VIDIOC_G/S_AUDIO: OK (Not Supported)
+	Inputs: 0 Audio Inputs: 0 Tuners: 0
+
+Output ioctls:
+	test VIDIOC_G/S_MODULATOR: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_ENUMAUDOUT: OK (Not Supported)
+	test VIDIOC_G/S/ENUMOUTPUT: OK (Not Supported)
+	test VIDIOC_G/S_AUDOUT: OK (Not Supported)
+	Outputs: 0 Audio Outputs: 0 Modulators: 0
+
+Input/Output configuration ioctls:
+	test VIDIOC_ENUM/G/S/QUERY_STD: OK (Not Supported)
+	test VIDIOC_ENUM/G/S/QUERY_DV_TIMINGS: OK (Not Supported)
+	test VIDIOC_DV_TIMINGS_CAP: OK (Not Supported)
+	test VIDIOC_G/S_EDID: OK (Not Supported)
+
+Control ioctls:
+	test VIDIOC_QUERY_EXT_CTRL/QUERYMENU: OK
+	test VIDIOC_QUERYCTRL: OK
+		fail: v4l2-test-controls.cpp(489): s_ctrl returned an error (13)
+	test VIDIOC_G/S_CTRL: FAIL
+		fail: v4l2-test-controls.cpp(736): s_ext_ctrls returned an error (13)
+	test VIDIOC_G/S/TRY_EXT_CTRLS: FAIL
+	test VIDIOC_(UN)SUBSCRIBE_EVENT/DQEVENT: OK
+	test VIDIOC_G/S_JPEGCOMP: OK (Not Supported)
+	Standard Controls: 19 Private Controls: 0
+
+Format ioctls:
+	test VIDIOC_ENUM_FMT/FRAMESIZES/FRAMEINTERVALS: OK
+		fail: v4l2-test-formats.cpp(1395): ret && node->has_frmintervals
+	test VIDIOC_G/S_PARM: FAIL
+	test VIDIOC_G_FBUF: OK (Not Supported)
+	test VIDIOC_G_FMT: OK
+	test VIDIOC_TRY_FMT: OK
+		fail: v4l2-test-formats.cpp(452): expected EINVAL, but got 16 when getting format for buftype 1
+	test VIDIOC_S_FMT: FAIL
+	test VIDIOC_G_SLICED_VBI_CAP: OK (Not Supported)
+	test Cropping: OK (Not Supported)
+	test Composing: OK (Not Supported)
+		fail: v4l2-test-formats.cpp(1806): doioctl(node, VIDIOC_S_FMT, &fmt)
+		fail: v4l2-test-formats.cpp(1954): testBasicScaling(node, fmt)
+	test Scaling: FAIL
+
+Codec ioctls:
+	test VIDIOC_(TRY_)ENCODER_CMD: OK (Not Supported)
+	test VIDIOC_G_ENC_INDEX: OK (Not Supported)
+	test VIDIOC_(TRY_)DECODER_CMD: OK (Not Supported)
+
+Buffer ioctls:
+		fail: v4l2-test-buffers.cpp(573): ret && ret != EINVAL (got 16)
+	test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: FAIL
+		fail: v4l2-test-buffers.cpp(783): VIDIOC_EXPBUF is supported, but the V4L2_MEMORY_MMAP support is missing or malfunctioning.
+		fail: v4l2-test-buffers.cpp(784): VIDIOC_EXPBUF is supported, but the V4L2_MEMORY_MMAP support is missing, probably due to earlier failing format tests.
+	test VIDIOC_EXPBUF: OK (Not Supported)
+	test Requests: OK (Not Supported)
+
+Total for uvcvideo device /dev/video2: 46, Succeeded: 39, Failed: 7, Warnings: 0
+v4l2-compliance 1.22.1, 64 bits, 64-bit time_t
+
+Compliance test for uvcvideo device /dev/video4:
+
+Driver Info:
+	Driver name      : uvcvideo
+	Card type        : Logitech Webcam C930e
+	Bus info         : usb-0000:02:1b.0-1
+	Driver version   : 6.1.112
+	Capabilities     : 0x84a00001
+		Video Capture
+		Metadata Capture
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04200001
+		Video Capture
+		Streaming
+		Extended Pix Format
+Media Driver Info:
+	Driver name      : uvcvideo
+	Model            : Logitech Webcam C930e
+	Serial           : A3B05BDE
+	Bus info         : usb-0000:02:1b.0-1
+	Media version    : 6.1.112
+	Hardware revision: 0x00000013 (19)
+	Driver version   : 6.1.112
+Interface Info:
+	ID               : 0x03000002
+	Type             : V4L Video
+Entity Info:
+	ID               : 0x00000001 (1)
+	Name             : Logitech Webcam C930e
+	Function         : V4L2 I/O
+	Flags            : default
+	Pad 0x01000007   : 0: Sink
+	  Link 0x02000022: from remote pad 0x100000a of entity 'Processing 3' (Video Pixel Formatter): Data, Enabled, Immutable
+
+Required ioctls:
+	test MC information (see 'Media Driver Info' above): OK
+	test VIDIOC_QUERYCAP: OK
+	test invalid ioctls: OK
+
+Allow for multiple opens:
+	test second /dev/video4 open: OK
+	test VIDIOC_QUERYCAP: OK
+	test VIDIOC_G/S_PRIORITY: OK
+	test for unlimited opens: OK
+
+Debug ioctls:
+	test VIDIOC_DBG_G/S_REGISTER: OK (Not Supported)
+	test VIDIOC_LOG_STATUS: OK (Not Supported)
+
+Input ioctls:
+	test VIDIOC_G/S_TUNER/ENUM_FREQ_BANDS: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_S_HW_FREQ_SEEK: OK (Not Supported)
+	test VIDIOC_ENUMAUDIO: OK (Not Supported)
+	test VIDIOC_G/S/ENUMINPUT: OK
+	test VIDIOC_G/S_AUDIO: OK (Not Supported)
+	Inputs: 1 Audio Inputs: 0 Tuners: 0
+
+Output ioctls:
+	test VIDIOC_G/S_MODULATOR: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_ENUMAUDOUT: OK (Not Supported)
+	test VIDIOC_G/S/ENUMOUTPUT: OK (Not Supported)
+	test VIDIOC_G/S_AUDOUT: OK (Not Supported)
+	Outputs: 0 Audio Outputs: 0 Modulators: 0
+
+Input/Output configuration ioctls:
+	test VIDIOC_ENUM/G/S/QUERY_STD: OK (Not Supported)
+	test VIDIOC_ENUM/G/S/QUERY_DV_TIMINGS: OK (Not Supported)
+	test VIDIOC_DV_TIMINGS_CAP: OK (Not Supported)
+	test VIDIOC_G/S_EDID: OK (Not Supported)
+
+Control ioctls (Input 0):
+	test VIDIOC_QUERY_EXT_CTRL/QUERYMENU: OK
+	test VIDIOC_QUERYCTRL: OK
+		fail: v4l2-test-controls.cpp(489): s_ctrl returned an error (13)
+	test VIDIOC_G/S_CTRL: FAIL
+		fail: v4l2-test-controls.cpp(736): s_ext_ctrls returned an error (13)
+	test VIDIOC_G/S/TRY_EXT_CTRLS: FAIL
+	test VIDIOC_(UN)SUBSCRIBE_EVENT/DQEVENT: OK
+	test VIDIOC_G/S_JPEGCOMP: OK (Not Supported)
+	Standard Controls: 19 Private Controls: 0
+
+Format ioctls (Input 0):
+	test VIDIOC_ENUM_FMT/FRAMESIZES/FRAMEINTERVALS: OK
+	test VIDIOC_G/S_PARM: OK
+	test VIDIOC_G_FBUF: OK (Not Supported)
+	test VIDIOC_G_FMT: OK
+	test VIDIOC_TRY_FMT: OK
+		warn: v4l2-test-formats.cpp(1036): Could not set fmt2
+	test VIDIOC_S_FMT: OK
+	test VIDIOC_G_SLICED_VBI_CAP: OK (Not Supported)
+	test Cropping: OK (Not Supported)
+	test Composing: OK (Not Supported)
+	test Scaling: OK (Not Supported)
+
+Codec ioctls (Input 0):
+	test VIDIOC_(TRY_)ENCODER_CMD: OK (Not Supported)
+	test VIDIOC_G_ENC_INDEX: OK (Not Supported)
+	test VIDIOC_(TRY_)DECODER_CMD: OK (Not Supported)
+
+Buffer ioctls (Input 0):
+	test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: OK
+	test VIDIOC_EXPBUF: OK
+	test Requests: OK (Not Supported)
+
+Total for uvcvideo device /dev/video4: 46, Succeeded: 44, Failed: 2, Warnings: 1
+v4l2-compliance 1.22.1, 64 bits, 64-bit time_t
+
+Compliance test for uvcvideo device /dev/video0:
 
 Driver Info:
 	Driver name      : uvcvideo
@@ -44,25 +298,84 @@ Entity Info:
 	Pad 0x0100000d   : 0: Sink
 	  Link 0x02000029: from remote pad 0x1000010 of entity 'Processing 3' (Video Pixel Formatter): Data, Enabled, Immutable
 
-User Controls
+Required ioctls:
+	test MC information (see 'Media Driver Info' above): OK
+	test VIDIOC_QUERYCAP: OK
+	test invalid ioctls: OK
 
-                     brightness 0x00980900 (int)    : min=0 max=255 step=1 default=128 value=128
-                       contrast 0x00980901 (int)    : min=0 max=255 step=1 default=128 value=128
-                     saturation 0x00980902 (int)    : min=0 max=255 step=1 default=128 value=128
-        white_balance_automatic 0x0098090c (bool)   : default=1 value=1
-                           gain 0x00980913 (int)    : min=0 max=255 step=1 default=0 value=0
-           power_line_frequency 0x00980918 (menu)   : min=0 max=2 default=2 value=2 (60 Hz)
-      white_balance_temperature 0x0098091a (int)    : min=2000 max=7500 step=10 default=4000 value=4000 flags=inactive
-                      sharpness 0x0098091b (int)    : min=0 max=255 step=1 default=128 value=128
-         backlight_compensation 0x0098091c (int)    : min=0 max=1 step=1 default=1 value=1
+Allow for multiple opens:
+	test second /dev/video0 open: OK
+	test VIDIOC_QUERYCAP: OK
+	test VIDIOC_G/S_PRIORITY: OK
+	test for unlimited opens: OK
 
-Camera Controls
+Debug ioctls:
+	test VIDIOC_DBG_G/S_REGISTER: OK (Not Supported)
+	test VIDIOC_LOG_STATUS: OK (Not Supported)
 
-                  auto_exposure 0x009a0901 (menu)   : min=0 max=3 default=3 value=3 (Aperture Priority Mode)
-         exposure_time_absolute 0x009a0902 (int)    : min=3 max=2047 step=1 default=250 value=250 flags=inactive
-     exposure_dynamic_framerate 0x009a0903 (bool)   : default=0 value=1
-                   pan_absolute 0x009a0908 (int)    : min=-36000 max=36000 step=3600 default=0 value=0
-                  tilt_absolute 0x009a0909 (int)    : min=-36000 max=36000 step=3600 default=0 value=0
-                 focus_absolute 0x009a090a (int)    : min=0 max=255 step=5 default=0 value=0 flags=inactive
-     focus_automatic_continuous 0x009a090c (bool)   : default=1 value=1
-                  zoom_absolute 0x009a090d (int)    : min=100 max=500 step=1 default=100 value=100
+Input ioctls:
+	test VIDIOC_G/S_TUNER/ENUM_FREQ_BANDS: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_S_HW_FREQ_SEEK: OK (Not Supported)
+	test VIDIOC_ENUMAUDIO: OK (Not Supported)
+		fail: v4l2-test-input-output.cpp(492): could not set input to 0
+	test VIDIOC_G/S/ENUMINPUT: FAIL
+	test VIDIOC_G/S_AUDIO: OK (Not Supported)
+	Inputs: 0 Audio Inputs: 0 Tuners: 0
+
+Output ioctls:
+	test VIDIOC_G/S_MODULATOR: OK (Not Supported)
+	test VIDIOC_G/S_FREQUENCY: OK (Not Supported)
+	test VIDIOC_ENUMAUDOUT: OK (Not Supported)
+	test VIDIOC_G/S/ENUMOUTPUT: OK (Not Supported)
+	test VIDIOC_G/S_AUDOUT: OK (Not Supported)
+	Outputs: 0 Audio Outputs: 0 Modulators: 0
+
+Input/Output configuration ioctls:
+	test VIDIOC_ENUM/G/S/QUERY_STD: OK (Not Supported)
+	test VIDIOC_ENUM/G/S/QUERY_DV_TIMINGS: OK (Not Supported)
+	test VIDIOC_DV_TIMINGS_CAP: OK (Not Supported)
+	test VIDIOC_G/S_EDID: OK (Not Supported)
+
+Control ioctls:
+	test VIDIOC_QUERY_EXT_CTRL/QUERYMENU: OK
+	test VIDIOC_QUERYCTRL: OK
+		fail: v4l2-test-controls.cpp(489): s_ctrl returned an error (13)
+	test VIDIOC_G/S_CTRL: FAIL
+		fail: v4l2-test-controls.cpp(736): s_ext_ctrls returned an error (13)
+	test VIDIOC_G/S/TRY_EXT_CTRLS: FAIL
+	test VIDIOC_(UN)SUBSCRIBE_EVENT/DQEVENT: OK
+	test VIDIOC_G/S_JPEGCOMP: OK (Not Supported)
+	Standard Controls: 19 Private Controls: 0
+
+Format ioctls:
+		fail: v4l2-test-formats.cpp(263): fmtdesc.description mismatch: was 'Y/UV 4:2:0', expected 'Y/CbCr 4:2:0'
+	test VIDIOC_ENUM_FMT/FRAMESIZES/FRAMEINTERVALS: FAIL
+		fail: v4l2-test-formats.cpp(1395): ret && node->has_frmintervals
+	test VIDIOC_G/S_PARM: FAIL
+	test VIDIOC_G_FBUF: OK (Not Supported)
+	test VIDIOC_G_FMT: OK
+	test VIDIOC_TRY_FMT: OK
+		fail: v4l2-test-formats.cpp(452): expected EINVAL, but got 16 when getting format for buftype 1
+	test VIDIOC_S_FMT: FAIL
+	test VIDIOC_G_SLICED_VBI_CAP: OK (Not Supported)
+	test Cropping: OK (Not Supported)
+	test Composing: OK (Not Supported)
+		fail: v4l2-test-formats.cpp(1806): doioctl(node, VIDIOC_S_FMT, &fmt)
+		fail: v4l2-test-formats.cpp(1954): testBasicScaling(node, fmt)
+	test Scaling: FAIL
+
+Codec ioctls:
+	test VIDIOC_(TRY_)ENCODER_CMD: OK (Not Supported)
+	test VIDIOC_G_ENC_INDEX: OK (Not Supported)
+	test VIDIOC_(TRY_)DECODER_CMD: OK (Not Supported)
+
+Buffer ioctls:
+		fail: v4l2-test-buffers.cpp(573): ret && ret != EINVAL (got 16)
+	test VIDIOC_REQBUFS/CREATE_BUFS/QUERYBUF: FAIL
+		fail: v4l2-test-buffers.cpp(783): VIDIOC_EXPBUF is supported, but the V4L2_MEMORY_MMAP support is missing or malfunctioning.
+		fail: v4l2-test-buffers.cpp(784): VIDIOC_EXPBUF is supported, but the V4L2_MEMORY_MMAP support is missing, probably due to earlier failing format tests.
+	test VIDIOC_EXPBUF: OK (Not Supported)
+	test Requests: OK (Not Supported)
+
+Total for uvcvideo device /dev/video0: 46, Succeeded: 38, Failed: 8, Warnings: 0
