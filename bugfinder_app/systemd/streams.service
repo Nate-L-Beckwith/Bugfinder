@@ -1,0 +1,19 @@
+[Unit]
+Description=Start FFmpeg Streams
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/bug/Bugfinder/bugfinder_app/ffmpeg/start_streams.sh
+Restart=always
+User=root
+WorkingDirectory=/home/bug/Bugfinder
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ffmpeg-streams
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
