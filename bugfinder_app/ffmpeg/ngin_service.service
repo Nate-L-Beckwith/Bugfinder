@@ -1,0 +1,14 @@
+[Unit]
+Description=Nginx RTMP Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/nginx
+ExecReload=/usr/sbin/nginx -s reload
+ExecStop=/usr/sbin/nginx -s stop
+PIDFile=/run/nginx.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
