@@ -30,7 +30,7 @@
         if (Hls.isSupported()) {
             var video0 = document.getElementById('cam0');
             var hls0 = new Hls();
-            hls0.loadSource('rtmp://192.168.1.202/live/camera0');  // Replace with your actual domain or IP
+            hls0.loadSource('http://192.168.1.202/hls/cam0.m3u8');  // Replace with your actual domain or IP
             hls0.attachMedia(video0);
             hls0.on(Hls.Events.MANIFEST_PARSED, function () {
                 video0.play();
@@ -38,14 +38,14 @@
 
             var video1 = document.getElementById('cam1');
             var hls1 = new Hls();
-            hls1.loadSource('rtmp://192.168.1.202/live/camera1');  // Replace with your actual domain or IP
+            hls1.loadSource('http://192.168.1.202/hls/cam1.m3u8');  // Replace with your actual domain or IP
             hls1.attachMedia(video1);
             hls1.on(Hls.Events.MANIFEST_PARSED, function () {
                 video1.play();
             });
         } else if (video0.canPlayType('application/vnd.apple.mpegurl')) {
-            video0.src = 'rtmp://192.168.1.202/live/camera0';  // Replace with your actual domain or IP
-            video1.src = 'rtmp://192.168.1.202/live/camera1';  // Replace with your actual domain or IP
+            video0.src = 'http://192.168.1.202/hls/cam0.m3u8';  // Replace with your actual domain or IP
+            video1.src = 'http://192.168.1.202/hls/cam1.m3u8';  // Replace with your actual domain or IP
             video0.addEventListener('loadedmetadata', function () {
                 video0.play();
             });
