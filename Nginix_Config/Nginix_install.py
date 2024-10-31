@@ -65,4 +65,8 @@ def setup_nginx(config):
     # Step 8: Verify Installation
     run_command([nginx_config['sbin_path'], "-vV"])
 
+    # Step 9: Enable and start Nginx RTMP service
+    run_command(["sudo", "systemctl", "enable", "nginx-rtmp"])
+    run_command(["sudo", "systemctl", "start", "nginx-rtmp"])
+
     print("Nginx setup and installation completed successfully.")
