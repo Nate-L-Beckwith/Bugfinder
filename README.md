@@ -28,6 +28,7 @@ Here’s an updated README with details for the additional files:
 - **FFmpeg**: Used for video streaming, installed as part of system requirements.
 - **Streaming Devices**: Details on configured devices are in `used_devices.txt`.
 
+
 ---
 
 ### Installation
@@ -42,7 +43,7 @@ bash preres.sh
 
 #### 2. Install Anaconda
 
-Run `install_conda.sh` to set up the `bugfinder` environment with necessary Python packages.
+Run `install_conda.sh` to install conda from source, & set up the `bugfinder` environment with necessary Python packages.
 
 ```bash
 bash install_conda.sh
@@ -50,10 +51,11 @@ bash install_conda.sh
 
 #### 3. Install Nginx with RTMP Module
 
-Install and configure Nginx with RTMP support using `Nginx_install.py`.
-
+Install and configure Nginx with RTMP support using `main.py`. Only seems to work when sudo, and full spesified path. 
+Most likely due to the lazy file paths for nginx install dir (/usr/local) to be addressed in a patch (carefully).
+ 
 ```bash
-python3 Nginx_install.py
+sudo /bugfinder/conda/env/python3 {bugfinder_repo}/Bugfinder/Nginix_config/main.py
 ```
 
 #### 4. Configure Nginx

@@ -5,13 +5,14 @@ import sys
 import tarfile
 from urllib.request import urlretrieve
 from git import Repo, GitCommandError
-
+import shlex
 
 def run_command(command, cwd=None):
-    """Run a shell command with error handling."""
+    """Run a shell command with error handling and support for wildcards."""
     try:
         print(f"Running command: {' '.join(command)}")
-        subprocess.run(command, check=True, cwd=cwd)
+        command_str = ' '.join(shlex.quote(arg) for arg in command)
+        subprocess.run(command_str, shell=True, check=True, cwd=cwd)
     except subprocess.CalledProcessError as e:
         print(f"Command '{' '.join(command)}' failed with error: {e}")
         sys.exit(1)
@@ -20,7 +21,8 @@ def run_command(command, cwd=None):
 def install_dependencies(dependencies):
     """Install necessary build dependencies."""
     print("Installing build dependencies...")
-    run_command(["sudo", "apt", "update"])
+    run_command(["sudo", "apt", "update"]) 
+    run_command(["sudo", "apt", "upgrade", "-y"])
     run_command(["sudo", "apt", "install", "-y"] + dependencies)
 
 

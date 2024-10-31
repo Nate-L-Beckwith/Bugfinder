@@ -2,12 +2,11 @@
 import os
 from utils import (run_command, install_dependencies, download_file, extract_tarball, clone_repository)
 
-
 def setup_nginx(config):
     """Setup and install Nginx with the specified configuration."""
     nginx_config = config.get("nginx", {})
     additional_config = config.get("additional", {})
-
+    nginx_service_files_dir = nginx_config.get("nginx_service_files_dir", {})
     # Derived paths
     nginx_dir = os.path.join(nginx_config["src_dir"], f"nginx-{nginx_config['version']}")
     nginx_tarball = os.path.join(nginx_config["src_dir"], f"nginx-{nginx_config['version']}.tar.gz")
@@ -33,7 +32,7 @@ def setup_nginx(config):
         "sudo",
         "-E",
         "./configure",
-        f"--prefix={nginx_config['install_dir']}",
+        f"--prefix={nginx_config['prefix']}",
         f"--sbin-path={nginx_config['sbin_path']}",
         f"--conf-path={nginx_config['conf_path']}",
         f"--pid-path={nginx_config['pid_path']}",
@@ -65,7 +64,11 @@ def setup_nginx(config):
     # Step 8: Verify Installation
     run_command([nginx_config['sbin_path'], "-vV"])
 
-    run_command(["sudo", "cp -ravf"])
+    # Ensure the directory exists and is not empty
+    if os.path.isdir(nginx_service_files_dir) and os.listdir(nginx_service_files_dir):
+        run_command(["sudo", "cp", "-rav", f"{nginx_service_files_dir}/*", "/etc/systemd/system/"])
+    else:
+        print(f"Warning: The directory {nginx_service_files_dir} does not exist or is empty.")
 
     # Step 9: Enable and start Nginx RTMP service
     run_command(["sudo", "systemctl", "enable", "nginx-rtmp"])
