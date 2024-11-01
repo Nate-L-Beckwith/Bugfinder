@@ -67,6 +67,7 @@ def clone_repository(repo_url, destination_dir):
 def install_prerequisites():
     """Install prerequisites for the script."""
     print("Installing prerequisites...")
+    run_command("sudo chmod +x $HOME/Bugfinder/bugfinder_app/preres.sh")
     run_command("sudo -E $HOME/Bugfinder/bugfinder_app/preres.sh")
     print("Prerequisites installed.")
 
