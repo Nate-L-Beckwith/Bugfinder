@@ -1,6 +1,6 @@
 .venv
 .vscode
-__py*
+*__py*
 *.pyc
 *.pyo
 *.DS_Store
@@ -9,3 +9,4 @@ __py*
 DS_Store
 *.log
 *.log.*
+history.txt

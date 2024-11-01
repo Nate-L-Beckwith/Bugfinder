@@ -1,6 +1,8 @@
 # nginx_setup/nginx_installer.py
 import os
 import subprocess
+
+import test
 from utils import (
     run_command,
     install_dependencies,
@@ -72,10 +74,21 @@ def setup_nginx(config):
     run_command("sudo -E make", cwd=nginx_dir)
     run_command("sudo -E make install", cwd=nginx_dir)
     run_command(f"{nginx_config['sbin_path']} -vV")
-    run_command(f"sudo cp -av {nginx_service_files_dir}/* /etc/systemd/system/")
-    run_command("sudo systemctl daemon-reload")
-    # Enable and start Nginx RTMP service
-    run_command("sudo systemctl enable nginx-rtmp")
-    run_command("sudo systemctl start nginx-rtmp && sudo systemctl status nginx-rtmp")
+    
+    def test_nginx():
+        try:
+            run_command(f"{nginx_config['sbin_path']} -t")
+        except Exception as e:
+            print(e)
+            print("Nginx test failed. Retrying...")
+            test_nginx()
+
+    run_command(f"{nginx_config['sbin_path']} -t")
+    
+    # run_command(f"sudo cp -av {nginx_service_files_dir}/* /etc/systemd/system/")
+    # run_command("sudo systemctl daemon-reload")
+    # # Enable and start Nginx RTMP service
+    # run_command("sudo systemctl enable nginx-rtmp")
+    # run_command("sudo systemctl start nginx-rtmp && sudo systemctl status nginx-rtmp")
 
     print("Nginx setup and installation completed successfully.")
