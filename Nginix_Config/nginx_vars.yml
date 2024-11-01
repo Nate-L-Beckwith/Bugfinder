@@ -5,13 +5,13 @@ nginx:
   install_dir: "/usr/local/nginx"
   sbin_path: "/usr/sbin/nginx"
   conf_path: "/etc/nginx/nginx.conf"
-  vhost_dir: "/etc/nginx/sites-available"
-  vhost_link_dir: "/etc/nginx/sites-enabled"
+  # vhost_dir: "/etc/nginx/sites-available"
+  # vhost_link_dir: "/etc/nginx/sites-enabled"
   pid_path: "/var/run/nginx.pid"
   lock_path: "/var/lock/nginx.lock"
   error_log_path: "/var/log/nginx/error.log"
   access_log_path: "/var/log/nginx/access.log"
-  nginx_service_files_dir: "/home/bug/Bugfinder/bugfinder_app/systemd"
+  # nginx_service_files_dir: "/home/bug/Bugfinder/bugfinder_app/systemd"
 
 additional:
   rtmp_module_repo: "https://github.com/arut/nginx-rtmp-module.git"

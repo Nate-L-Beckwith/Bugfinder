@@ -7,6 +7,7 @@ from urllib.request import urlretrieve
 from git import Repo, GitCommandError
 from setuptools import Command
 
+
 def run_command(command, cwd=None):
     """Run a shell command with error handling."""
     try:
@@ -15,6 +16,8 @@ def run_command(command, cwd=None):
     except subprocess.CalledProcessError as e:
         print(f"Command '{command}' failed with error: {e}")
         sys.exit(1)
+
+
 
 def install_dependencies(dependencies):
     """Install necessary build dependencies."""
@@ -59,17 +62,25 @@ def clone_repository(repo_url, destination_dir):
             sys.exit(1)
     else:
         print(f"Repository already exists at {destination_dir}.")
-        
+
+
 def install_prerequisites():
     """Install prerequisites for the script."""
     print("Installing prerequisites...")
     run_command("sudo -E $HOME/Bugfinder/bugfinder_app/preres.sh")
     print("Prerequisites installed.")
 
-def install_anacoda():
+
+def install_anaconda():
     """Install Anaconda."""
     print("Installing Anaconda...")
+    run_command("sudo chmod +x $HOME/Bugfinder/Nginix_Config/conda/install_conda.sh")
     run_command("sudo -E $HOME/Bugfinder/Nginix_Config/conda/install_conda.sh")
     print("Anaconda installed.")
 
-
+# def start_rtmp(config):
+#     """Start the RTMP server."""
+#     print("Starting RTMP server...")
+#     run_command(f"sudo {config['nginx']['sbin_path']}")
+#     print("RTMP server started.")
+    

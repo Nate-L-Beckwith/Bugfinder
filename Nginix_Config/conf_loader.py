@@ -31,7 +31,7 @@ def validate_config(config):
         "lock_path",
         "error_log_path",
         "access_log_path",
-        "nginx_service_files_dir",
+        # "nginx_service_files_dir",
     ]
 
     for var in nginx_vars:

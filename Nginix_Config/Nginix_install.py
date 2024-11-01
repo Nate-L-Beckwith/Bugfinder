@@ -17,7 +17,7 @@ def setup_nginx(config):
     )
 
     # Ensure source directory exists
-    os.makedirs(nginx_config["src_dir"], exist_ok=True)
+    os.makedirs(nginx_config["nginx"], exist_ok=True)
 
     # Install dependencies
     install_dependencies(additional_config["dependencies"])

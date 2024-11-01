@@ -1,6 +1,9 @@
 # main.py
 import os
-from Nginix_Config.utils import install_prerequisites, install_anaconda
+from bugfinder_web import configure_sites
+from utils import install_prerequisites, install_anaconda
+# , start_rtmp
+
 from conf_loader import load_config, validate_config
 from Nginix_install import setup_nginx
 
@@ -18,6 +21,9 @@ if __name__ == "__main__":
     install_prerequisites()
     
     install_anaconda()
-    
     # Setup Nginx
     setup_nginx(config)
+    
+    configure_sites(config)
+
+    # start_rtmp(config)
