@@ -1,15 +1,6 @@
 # nginx_setup/nginx_installer.py
 import os
-import subprocess
-
-import test
-from utils import (
-    run_command,
-    install_dependencies,
-    download_file,
-    extract_tarball,
-    clone_repository,
-)
+from utils import *
 
 
 def setup_nginx(config):
@@ -74,16 +65,17 @@ def setup_nginx(config):
     run_command("sudo -E make", cwd=nginx_dir)
     run_command("sudo -E make install", cwd=nginx_dir)
     run_command(f"{nginx_config['sbin_path']} -vV")
-    
+
     def test_nginx():
+        """Test Nginx configuration"""
         try:
             run_command(f"{nginx_config['sbin_path']} -t")
         except Exception as e:
             print(e)
-            print("Nginx test failed. Retrying...")
-            test_nginx()
-
-    run_command(f"{nginx_config['sbin_path']} -t")
+            print("Nginx test failed.")
+            sys.exit(1)
+    
+    test_nginx()
     
     # run_command(f"sudo cp -av {nginx_service_files_dir}/* /etc/systemd/system/")
     # run_command("sudo systemctl daemon-reload")

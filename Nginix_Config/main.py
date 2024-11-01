@@ -1,5 +1,6 @@
 # main.py
 import os
+from Nginix_Config.utils import install_prerequisites, install_anaconda
 from conf_loader import load_config, validate_config
 from Nginix_install import setup_nginx
 
@@ -14,5 +15,9 @@ if __name__ == "__main__":
     # Validate configuration
     validate_config(config)
 
+    install_prerequisites()
+    
+    install_anaconda()
+    
     # Setup Nginx
     setup_nginx(config)

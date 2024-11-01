@@ -5,9 +5,10 @@ import sys
 import tarfile
 from urllib.request import urlretrieve
 from git import Repo, GitCommandError
+from setuptools import Command
 
 def run_command(command, cwd=None):
-    """Run a shell command with error handling and support for wildcards."""
+    """Run a shell command with error handling."""
     try:
         print(f"Running command: {command}")
         subprocess.run(command, shell=True, check=True, cwd=cwd)
@@ -58,3 +59,17 @@ def clone_repository(repo_url, destination_dir):
             sys.exit(1)
     else:
         print(f"Repository already exists at {destination_dir}.")
+        
+def install_prerequisites():
+    """Install prerequisites for the script."""
+    print("Installing prerequisites...")
+    run_command("sudo -E $HOME/Bugfinder/bugfinder_app/preres.sh")
+    print("Prerequisites installed.")
+
+def install_anacoda():
+    """Install Anaconda."""
+    print("Installing Anaconda...")
+    run_command("sudo -E $HOME/Bugfinder/Nginix_Config/conda/install_conda.sh")
+    print("Anaconda installed.")
+
+
