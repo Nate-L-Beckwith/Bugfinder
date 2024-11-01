@@ -5,7 +5,7 @@ import sys
 import tarfile
 from urllib.request import urlretrieve
 from git import Repo, GitCommandError
-import shlex
+
 def run_command(command, cwd=None):
     """Run a shell command with error handling and support for wildcards."""
     try:
