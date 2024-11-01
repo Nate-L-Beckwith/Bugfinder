@@ -4,11 +4,14 @@ After=network.target
 
 [Service]
 Type=forking
+ExecStartPre=/usr/sbin/nginx -t
 ExecStart=/usr/sbin/nginx
 ExecReload=/usr/sbin/nginx -s reload
 ExecStop=/usr/sbin/nginx -s stop
 PIDFile=/run/nginx.pid
 Restart=on-failure
+User=root
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
